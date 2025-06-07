@@ -24,12 +24,6 @@
       height: 50vh;
       overflow-y: auto;
     }
-    .side-panel {
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 20px;
-    }
     .form-label {
       font-weight: 500;
     }
@@ -40,7 +34,6 @@
     <div id="login-try" class="row justify-content-center align-items-center vh-100">
       <div class="col-md-6 col-lg-4">
         <div class="card text-center p-4">
-          <img src="assets/BioSycle_logo.jpg" alt="LinguaLink" class="mb-4 mx-auto" width="100" />
           <h3 class="mb-4">Login to LinguaLink</h3>
           <input type="text" id="username-field" class="form-control mb-3" placeholder="Username">
           <input type="password" id="password-field" class="form-control mb-3" placeholder="Password">
@@ -49,19 +42,12 @@
       </div>
     </div>
 
-    <div id="xm-chat" style="display:none;">
-      <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1>LinguaLink</h1>
-        <div>
-          <button id="xm_voice_menu" class="btn btn-outline-primary me-2"><i class="fas fa-cog"></i></button>
-          <button id="xm_login_menu" class="btn btn-outline-secondary"><i class="fas fa-user"></i></button>
-        </div>
-      </div>
-
-      <div class="row mb-3">
-        <div class="col-md-3 side-panel">
-          <div class="card p-3" id="user1-card">
-            <h5 class="text-center">User 1</h5>
+    <div id="settings-page" style="display:none;">
+      <h3 class="mb-3">User Settings</h3>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card p-3 mb-3">
+            <h5>User 1</h5>
             <input type="text" id="user1-name" class="form-control mb-2" placeholder="Enter name">
             <label class="form-label">Language</label>
             <select id="user1-lang" class="form-select mb-2">
@@ -71,20 +57,18 @@
               <option value="fr-FR">French</option>
               <option value="de-DE">German</option>
               <option value="ta-IN">Tamil</option>
+              <option value="ja-JP">Japanese</option>
+              <option value="ru-RU">Russian</option>
             </select>
-            <label class="form-check-label mb-2"><input type="checkbox" id="user1-mute"> Mute translation</label>
-            <span id="user1-status" class="badge bg-secondary">Waiting</span>
+            <label class="form-label">Voice (for target language)</label>
+            <select id="user1-voice" class="form-select mb-2"></select>
+            <label><input type="checkbox" id="user1-mute"> Mute translation</label>
           </div>
+        </div>
 
-          <div class="card p-3 text-center">
-            <button id="start-btn" class="btn btn-primary btn-lg rounded-circle">
-              <i class="fas fa-microphone"></i>
-            </button>
-            <p class="mt-2" id="status-text">Click microphone to start</p>
-          </div>
-
-          <div class="card p-3" id="user2-card">
-            <h5 class="text-center">User 2</h5>
+        <div class="col-md-6">
+          <div class="card p-3 mb-3">
+            <h5>User 2</h5>
             <input type="text" id="user2-name" class="form-control mb-2" placeholder="Enter name">
             <label class="form-label">Language</label>
             <select id="user2-lang" class="form-select mb-2">
@@ -94,13 +78,31 @@
               <option value="fr-FR">French</option>
               <option value="de-DE">German</option>
               <option value="ta-IN">Tamil</option>
+              <option value="ja-JP">Japanese</option>
+              <option value="ru-RU">Russian</option>
             </select>
-            <label class="form-check-label mb-2"><input type="checkbox" id="user2-mute"> Mute translation</label>
-            <span id="user2-status" class="badge bg-secondary">Waiting</span>
+            <label class="form-label">Voice (for target language)</label>
+            <select id="user2-voice" class="form-select mb-2"></select>
+            <label><input type="checkbox" id="user2-mute"> Mute translation</label>
           </div>
         </div>
+      </div>
+      <div class="text-center">
+        <button id="back-to-chat" class="btn btn-secondary mt-3">Back to Chat</button>
+      </div>
+    </div>
 
-        <div class="col-md-9">
+    <div id="xm-chat" style="display:none;">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>LinguaLink</h1>
+        <div>
+          <button id="xm_voice_menu" class="btn btn-outline-primary me-2"><i class="fas fa-sliders-h"></i> Settings</button>
+          <button id="xm_login_menu" class="btn btn-outline-secondary"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-12">
           <div class="card mb-3">
             <div class="card-header d-flex justify-content-between">
               <span>Conversation</span>
@@ -109,6 +111,13 @@
             <div id="messages-container" class="card-body"></div>
           </div>
         </div>
+      </div>
+
+      <div class="text-center">
+        <button id="start-btn" class="btn btn-primary btn-lg rounded-circle">
+          <i class="fas fa-microphone"></i>
+        </button>
+        <p class="mt-2" id="status-text">Click microphone to start</p>
       </div>
     </div>
 
