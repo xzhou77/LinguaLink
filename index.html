@@ -1,86 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <title>Speech App</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" />
-  </head>
-  <body>
-    <h3 style = "text-align: center;"></h3>
-    <div id="xm-chat" style="display: inline;">
-        <div style = "width: 8%; float: left; align-content: left;">     
-            
-            </p>
-            <button id="xm_login_menu" class="menubtn" style="background-color: black;"><img src = "assets/lock.svg" /></button>
-            </p>
-            <button id="xm_voice_menu" class="menubtn" style="background-color: black;"><img src = "assets/settings.svg" /></button>
-            </p>
-            <button id="start-btn" class="menubtn" style="background-color: black;"><img src= "assets/stop-circle.svg" /></button>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LinguaLink</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      padding: 20px;
+    }
+    .card {
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      border: none;
+    }
+    .btn-lg.rounded-circle {
+      width: 70px;
+      height: 70px;
+    }
+    #messages-container {
+      height: 50vh;
+      overflow-y: auto;
+    }
+    .side-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 20px;
+    }
+    .form-label {
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="login-try" class="row justify-content-center align-items-center vh-100">
+      <div class="col-md-6 col-lg-4">
+        <div class="card text-center p-4">
+          <img src="assets/BioSycle_logo.jpg" alt="LinguaLink" class="mb-4 mx-auto" width="100" />
+          <h3 class="mb-4">Login to LinguaLink</h3>
+          <input type="text" id="username-field" class="form-control mb-3" placeholder="Username">
+          <input type="password" id="password-field" class="form-control mb-3" placeholder="Password">
+          <button id="login_button" class="btn btn-primary w-100">Login</button>
         </div>
-        <div style = "margin-left: 10%;">
-            <div id="messages" style="height:50rem; width: 100%; overflow-y: auto; background-color: rgb(231, 230, 226);"></div>
-        </div>
+      </div>
     </div>
-    <div id="xm-voice" style="display: none;">
-        <h3>Language</h3>
-        <button id="xm_lang_menu" class="menubtn" style="background-color: lightskyblue;">Chn  </button>
-        <h3>Mute</h3>
-        <button id="xm_mute_menu" class="menubtn" style="background-color: lightskyblue;">Mute </button>
-        <h3>Voice</h3>
-        <select id="v_voices" class="form-select bg-secondary text-light"></select>
-        <div class="d-flex mt-4 text-light">
-            <div>
-                <p style="color:black;">Volume</p>
-                <input type="range" min="0" max="1" value="1" step="0.1" id="v_volume" />
-                <span id="volume-label" class="ms-2">1</span>
-            </div>
-            <div class="mx-5">
-                <p style="color:black;">Speed</p>
-                <input type="range" min="0.1" max="10" value="1" id="v_rate" step="0.1" />
-                <span id="rate-label" class="ms-2">1</span>
-            </div>
-            <div>
-                <p style="color:black;">Pitch</p>
-                <input type="range" min="0" max="2" value="1" step="0.1" id="v_pitch" />
-                <span id="pitch-label" class="ms-2">1</span>
-            </div>
-        </div>
-        <textarea id="trytext" class="form-control bg-dark text-light mt-5" cols="30" rows="10" placeholder="Type here..."></textarea>
-        <div class="mb-5">
-            <button id="v_start" class="btn btn-success mt-5 me-3">Start</button>
-            <button id="v_pause" class="btn btn-warning mt-5 me-3">Stop</button>
-            <button id="v_resume" class="btn btn-info mt-5 me-3">Resume</button>
-            <button id="v_cancel" class="btn btn-danger mt-5 me-3">Cancel</button>
-        </div>
-        </p>
+
+    <div id="xm-chat" style="display:none;">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>LinguaLink</h1>
         <div>
-            <button id="xm_chat_menu" style="background-color: lightseagreen;">Return</button>
+          <button id="xm_voice_menu" class="btn btn-outline-primary me-2"><i class="fas fa-cog"></i></button>
+          <button id="xm_login_menu" class="btn btn-outline-secondary"><i class="fas fa-user"></i></button>
         </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-3 side-panel">
+          <div class="card p-3" id="user1-card">
+            <h5 class="text-center">User 1</h5>
+            <input type="text" id="user1-name" class="form-control mb-2" placeholder="Enter name">
+            <label class="form-label">Language</label>
+            <select id="user1-lang" class="form-select mb-2">
+              <option value="en-US">English</option>
+              <option value="zh-CN">Chinese</option>
+              <option value="es-ES">Spanish</option>
+              <option value="fr-FR">French</option>
+              <option value="de-DE">German</option>
+              <option value="ta-IN">Tamil</option>
+            </select>
+            <label class="form-check-label mb-2"><input type="checkbox" id="user1-mute"> Mute translation</label>
+            <span id="user1-status" class="badge bg-secondary">Waiting</span>
+          </div>
+
+          <div class="card p-3 text-center">
+            <button id="start-btn" class="btn btn-primary btn-lg rounded-circle">
+              <i class="fas fa-microphone"></i>
+            </button>
+            <p class="mt-2" id="status-text">Click microphone to start</p>
+          </div>
+
+          <div class="card p-3" id="user2-card">
+            <h5 class="text-center">User 2</h5>
+            <input type="text" id="user2-name" class="form-control mb-2" placeholder="Enter name">
+            <label class="form-label">Language</label>
+            <select id="user2-lang" class="form-select mb-2">
+              <option value="en-US">English</option>
+              <option value="zh-CN">Chinese</option>
+              <option value="es-ES">Spanish</option>
+              <option value="fr-FR">French</option>
+              <option value="de-DE">German</option>
+              <option value="ta-IN">Tamil</option>
+            </select>
+            <label class="form-check-label mb-2"><input type="checkbox" id="user2-mute"> Mute translation</label>
+            <span id="user2-status" class="badge bg-secondary">Waiting</span>
+          </div>
+        </div>
+
+        <div class="col-md-9">
+          <div class="card mb-3">
+            <div class="card-header d-flex justify-content-between">
+              <span>Conversation</span>
+              <button id="clear-btn" class="btn btn-sm btn-outline-secondary"><i class="fas fa-trash"></i> Clear</button>
+            </div>
+            <div id="messages-container" class="card-body"></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div id="login-try" style = "display: none; width: 100%; height: 100%; padding: 30px; justify-content: center;">
-        <div style= "width: 100%; height: 50%; padding: 30px; justify-content: center;">
-          <input type="text" name="username" id="username-field" style= "height: 20%;" placeholder="Username">
-          <br>
-          <br>
-          <input type="password" name="password" id="password-field" style= "height: 20%;" placeholder="Password">
-          <br>
-          <br>
-          <button id="login_button" type="submit" style = "height: 20%; color: white;background-color: green; padding: 5px;">Login</button>    
-        </div>
-        <div style= "width: 100%; height: 100%; padding: 30px; justify-content: center;">
-          <img src="assets/BioSycle_logo.jpg" alt="BioSycle" width="150rem" height="150rem" />
-        </div>
-    </div>
-   </body>
 
-    <script>
-
-       document.querySelector("h3").innerText = "LinguaLink";  
-	</script>
-
-    <script src="index.js"></script>
-  </body>
+    <script src="script.js"></script>
+  </div>
+</body>
 </html>
+
