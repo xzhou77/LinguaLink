@@ -153,8 +153,9 @@ function handleResult(e) {
 }
 
 async function translate(text, targetLang) {
-  const response = await fetch('http://localhost:8000/translate', {
-    method: 'POST',
+ // const response = await fetch('http://localhost:8000/translate', {
+    const response = await fetch('https://translate-svr.onrender.com/translate', {
+    method:'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ text, targetLang })
   });
